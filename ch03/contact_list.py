@@ -17,11 +17,25 @@ class Contact:
 		self.email = email
 		self.all_contacts.append(self)
 
+class Friend(Contact):
+	"""
+	Demonstration of overriding and use of super(). Friend is a Contact with
+	a phone number.
+	"""
+	def __init__(self, name, email, phone):
+		super().__init__(name, email)
+		self.phone = phone
+		
+
 def main():
 	c1 = Contact("John A", "johna@example.net")
 	c2 = Contact("John B", "johnb@example.net")
 	c3 = Contact("Jenna C", "jennac@example.net")
+	# Access class variable through class
 	print([c.name for c in Contact.all_contacts.search('John')])
+	c4 = Friend("Friend D", "friendd@example.net", "555-5555")
+	# Access class variable though instance
+	print([c.name for c in c4.all_contacts.search('Friend')])
 
 if __name__ == '__main__':
 	main()
