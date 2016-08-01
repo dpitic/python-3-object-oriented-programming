@@ -17,6 +17,14 @@ class Contact:
 		self.email = email
 		self.all_contacts.append(self)
 
+class AddressHolder:
+	"""Class used to hold addresses. Demonstration of multiple inheritance."""
+	def __init__(self, street, city, state, code):
+		self.street = street
+		self.city = city
+		self.state = state
+		self.code = code
+
 class Friend(Contact):
 	"""
 	Demonstration of overriding and use of super(). Friend is a Contact with
@@ -25,7 +33,6 @@ class Friend(Contact):
 	def __init__(self, name, email, phone):
 		super().__init__(name, email)
 		self.phone = phone
-		
 
 def main():
 	c1 = Contact("John A", "johna@example.net")
@@ -39,5 +46,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-		
-		
