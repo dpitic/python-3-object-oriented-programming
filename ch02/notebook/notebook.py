@@ -48,7 +48,7 @@ class Notebook:
     def _find_note(self, note_id):
         '''Locate the note with the given id.'''
         for note in self.notes:
-            if note.id == note_id:
+            if str(note.id) == str(note_id):
                 return note
         return None
 
@@ -56,7 +56,11 @@ class Notebook:
         '''
         Find the note with the given id and change its memo to the given value.
         '''
-        self._find_note(note_id).memo = memo
+        note = self._find_note(note_id)
+        if note:
+            note.memo = memo
+            return True
+        return False
 
     def modify_tags(self, note_id, tags):
         '''
@@ -70,3 +74,21 @@ class Notebook:
     def search(self, filter):
         '''Find all notes that match the given filter string.'''
         return [note for note in self.notes if note.match(filter)]
+
+# Sample code to demonstrate the Notebook and Note API
+def main():
+    n = Notebook()
+    n.new_note("hello world")
+    n.new_note("hello again")
+    print(n.notes)
+    print(n.notes[0].id)
+    print(n.notes[1].id)
+    print(n.notes[0].memo)
+    print(n.search("hello"))
+    print(n.search("world"))
+    n.modify_memo(1, "hi world")
+    print(n.notes[0].memo)
+
+# Module import guard. Execute sample code if explicitly run.
+if __name__ == '__main__':
+    main()
