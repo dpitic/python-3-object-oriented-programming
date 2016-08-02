@@ -17,15 +17,7 @@ class Contact:
 		self.email = email
 		self.all_contacts.append(self)
 
-class AddressHolder:
-	"""Class used to hold addresses. Demonstration of multiple inheritance."""
-	def __init__(self, street, city, state, code):
-		self.street = street
-		self.city = city
-		self.state = state
-		self.code = code
-
-class Friend(Contact, AddressHolder):
+class Friend(Contact):
 	"""
 	Demonstration of overriding and use of super(). Friend is a Contact with
 	a phone number.
