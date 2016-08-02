@@ -25,7 +25,7 @@ class AddressHolder:
 		self.state = state
 		self.code = code
 
-class Friend(Contact):
+class Friend(Contact, AddressHolder):
 	"""
 	Demonstration of overriding and use of super(). Friend is a Contact with
 	a phone number.
