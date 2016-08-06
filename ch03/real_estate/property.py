@@ -1,5 +1,5 @@
 # Constant declarations
-COLS = 80       # Maximum number of text display columns
+COLS = 80  # Maximum number of text display columns
 
 
 class Property:
@@ -264,3 +264,34 @@ class Agent:
         init_args = property_class.prompt_init()
         # Add the appropriate property object to the property list.
         self.property_list.append(property_class(**init_args))
+
+
+# Demonstration code. Add a few different property types to the Agent property
+# list and display the properties in the Agent property list.
+def main():
+    agent = Agent()
+    # First property type is a rental house
+    # Property attributes
+    init_args = {'square_feet': 900, 'beds': 2, 'baths': 'one and a half'}
+    # House attributes
+    init_args.update({'fenced': 'yes', 'garage': 'detached', 'num_stories': 1})
+    # Rental attributes
+    init_args.update({'rent': 1200, 'utilities': 'included', 'furnished': 'no'})
+    # Add the rental house to the property list
+    agent.property_list.append(HouseRental(**init_args))
+
+    # Second property type is an apartment for sale
+    # Property attributes
+    init_args = {'square_feet': 800, 'beds': 3, 'baths': 2}
+    # Apartment properties
+    init_args.update({'laundry': 'ensuite', 'balcony': 'yes'})
+    # Purchase properties
+    init_args.update({'price': '$200,000', 'taxes': 1500})
+    # Add the apartment for sale to the property list
+    agent.property_list.append(ApartmentPurchase(**init_args))
+    agent.display_properties()
+
+
+# Import guard
+if __name__ == '__main__':
+    main()
