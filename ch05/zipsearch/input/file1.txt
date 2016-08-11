@@ -1,0 +1,5 @@
+This is a test input file for the zip program.
+Hello, hi, hello
+hello
+hello
+hi there, hello, hello, hi there
