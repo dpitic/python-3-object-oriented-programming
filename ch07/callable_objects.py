@@ -17,50 +17,28 @@ def format_time(message, *args):
     print(message.format(*args, now=now))
 
 
-# Set of callbacks used to test the timer
-def one(timer):
-    format_time("{now}: Called One")
-
-
-def two(timer):
-    format_time("{now}: Called Two")
-
-
-def three(timer):
-    format_time("{now}: Called Three")
-
-
 class Repeater:
     """
-    Class used to demonstrate that methods can be used as callbacks.
+    Class used to demonstrate that it is possible to create an object that can
+    be called as though it were a function.
     """
 
     def __init__(self):
         self.count = 0
 
-    def repeater(self, timer):
+    def __call__(self, timer):
         """
-        Add this method as a callback with a delay of 5 seconds to timer.
-        :param timer: object used to execute this callback method.
+        Add this object as a callback with a delay of 5 seconds to timer.
+        :param timer: object used to execute this object after 5 seconds.
         :return: None
         """
         format_time("{now}: repeat {0}", self.count)
         self.count += 1
-        timer.call_after(5, self.repeater)
+        timer.call_after(5, self)
 
 
 # Demonstration and sample code
 timer = Timer()
-# Add a series of normal functions as callbacks
-timer.call_after(1, one)
-timer.call_after(2, one)
-timer.call_after(2, two)
-timer.call_after(4, two)
-timer.call_after(3, three)
-timer.call_after(6, three)
-repeater = Repeater()
-# Add an object method as a callback. Note that the callback method adds itself
-# as an event, resulting in an infinite number of events.
-timer.call_after(5, repeater.repeater)
+timer.call_after(5, Repeater())
 format_time("{now}: Starting")
 timer.run()
