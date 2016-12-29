@@ -1,3 +1,5 @@
+import datetime
+
 """
 Demonstration of the abstract factory pattern.
 
@@ -110,4 +112,46 @@ class FranceFormatterFactory:
     def create_currency_formatter(self):
         return FranceCurrencyFormatter()
 
-# Formatter factory
+# Formatter factory map
+factory_map = {
+    'US': USAFormatterFactory,
+    'FR': FranceFormatterFactory
+}
+
+
+# Demonstration of API
+def main():
+    # Work with today's date
+    today = datetime.date.today()
+    y, m, d = (today.year, today.month, today.day)
+    print(y, m, d)
+    # Currency test data
+    base = 14500
+    cents = 50
+    # Test US locale
+    country_code = 'US'
+    formatter_factory = factory_map.get(country_code)()
+    date_formatter = formatter_factory.create_date_formatter()
+    currency_formatter = formatter_factory.create_currency_formatter()
+    print("Today's date in US format: {}".format(
+        date_formatter.format_date(y, m, d)
+    ))
+    print('Amount in US locale: {}'.format(
+        currency_formatter.format_currency(base, cents)
+    ))
+    # Test FR locale
+    country_code = 'FR'
+    formatter_factory = factory_map.get(country_code)()
+    date_formatter = formatter_factory.create_date_formatter()
+    currency_formatter = formatter_factory.create_currency_formatter()
+    print("Today's date in FR format: {}".format(
+        date_formatter.format_date(y, m, d)
+    ))
+    print('Amount in FR locale: {}'.format(
+        currency_formatter.format_currency(base, cents)
+    ))
+
+
+# Import guard
+if __name__ == '__main__':
+    main()
