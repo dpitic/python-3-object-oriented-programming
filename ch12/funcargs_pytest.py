@@ -1,16 +1,18 @@
 from stats import StatsList
+import pytest
 
 """
-Demonstration of using the py.test funcargs feature to set up variables.
+Demonstration of using the py.test framework @pytest.fixture() feature to set up
+variables.
 """
 
 
-def pytest_funcarg__valid_stats(request):
+#def pytest_funcarg__valid_stats(request):  # this is deprecated
+@pytest.fixture
+def valid_stats(request):
     """
     Global test configuration. This function can also be placed in conftest.py
-    which is parsed by py.test. Funcargs must be named according to the
-    convention pytest_funcarg__<identifier>, where <identifier> is a valid
-    variable name that can be used as a parameter in a test function.
+    which is parsed by py.test.
     :param request:
     :return: object to be passed as an argument into the individual test
     functions.
